@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pendaftaran Santri Baru</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body{background:linear-gradient(135deg,#ffffff,#f7f7f7);min-height:100vh;}
+header{background:linear-gradient(135deg,#d4af37,#f9e79f);padding:40px 20px;text-align:center;color:#fff;}
+.container{max-width:900px;margin:50px auto;background:#fff;padding:40px;border-radius:20px;
+box-shadow:0 20px 50px rgba(0,0,0,0.12);border:3px solid rgba(212,175,55,0.3);}
+h2{text-align:center;color:#d4af37;margin-bottom:30px;}
+form{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+label{font-size:13px;color:#555;}
+input,select,textarea{width:100%;padding:12px;border-radius:10px;border:1px solid #ddd;}
+textarea{grid-column:span 2;resize:none;}
+.full{grid-column:span 2;}
+button{grid-column:span 2;padding:15px;border:none;border-radius:50px;
+background:linear-gradient(135deg,#d4af37,#f9e79f);color:#fff;font-size:16px;font-weight:600;}
+footer{text-align:center;padding:20px;font-size:13px;color:#777;}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>✨ Pendaftaran Santri Baru ✨</h1>
+  <p>Tahun Ajaran 2025 / 2026</p>
+</header>
+
+<div class="container">
+<h2>Formulir Pendaftaran</h2>
+
+<form id="formPendaftaran">
+
+<div>
+<label>Nama Lengkap</label>
+<input type="text" name="nama_lengkap" required>
+</div>
+
+<div>
+<label>Tempat Lahir</label>
+<input type="text" name="tempat_lahir" required>
+</div>
+
+<div>
+<label>Tanggal Lahir</label>
+<input type="date" name="tanggal_lahir" required>
+</div>
+
+<div>
+<label>Jenis Kelamin</label>
+<select name="jenis_kelamin" required>
+<option value="">Pilih</option>
+<option>Laki-laki</option>
+<option>Perempuan</option>
+</select>
+</div>
+
+<div>
+<label>Asal Sekolah</label>
+<input type="text" name="asal_sekolah" required>
+</div>
+
+<div>
+<label>Orang Tua / Wali</label>
+<input type="text" name="orang_tua" required>
+</div>
+
+<div>
+<label>No HP / WhatsApp</label>
+<input type="tel" name="no_hp" required>
+</div>
+
+<div class="full">
+<label>Alamat Lengkap</label>
+<textarea name="alamat" rows="4" required></textarea>
+</div>
+
+<button type="submit">💎 Daftar Sekarang</button>
+</form>
+</div>
+
+<script>
+document.getElementById("formPendaftaran").addEventListener("submit", function(e){
+  e.preventDefault();
+
+  const data = Object.fromEntries(new FormData(this).entries());
+
+  fetch("https://script.google.com/macros/s/AKfycby6HqLuuUZ6qani-3xhHylr089eNW5B-7ZWebElNplS-yHu-0hUFnS5h6lAIh0LNGL_/exec", {
+    method: "POST",
+    body: JSON.stringify(data)
+  })
+  .then(res => res.json())
+  .then(res => {
+    if(res.status === "success"){
+      alert("✅ Pendaftaran berhasil!");
+      this.reset();
+    } else {
+      alert("❌ Gagal menyimpan data");
+    }
+  })
+  .catch(() => alert("❌ Koneksi error"));
+});
+</script>
+
+<footer>
+© 2025 Pendaftaran Santri Baru
+</footer>
+
+</body>
+</html>
